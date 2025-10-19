@@ -17,9 +17,7 @@ CREATE TABLE IF NOT EXISTS Books (
     author_id INT NOT NULL,
     price DOUBLE NOT NULL,
     publication_date DATE,
-    FOREIGN KEY (author_id) REFERENCES AUTHORS(author_id)
-        ON UPDATE CASCADE
-        ON DELETE RESTRICT
+    FOREIGN KEY (author_id) REFERENCES Authorss(author_id)
 );
 
 -- 5️⃣ CREATE TABLE: CUSTOMERS
@@ -35,9 +33,7 @@ CREATE TABLE IF NOT EXISTS Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT NOT NULL,
     order_date DATE NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(customer_id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
 -- 7️⃣ CREATE TABLE: ORDER_DETAILS
@@ -46,10 +42,6 @@ CREATE TABLE IF NOT EXISTS Order_Details (
     order_id INT NOT NULL,
     book_id INT NOT NULL,
     quantity DOUBLE NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (book_id) REFERENCES BOOKS(book_id)
-        ON UPDATE CASCADE
-        ON DELETE RESTRICT
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
